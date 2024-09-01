@@ -58,9 +58,17 @@ namespace STOCKW.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(cidade);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    _context.Add(cidade);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    // Log o erro e/ou exiba uma mensagem de erro
+                    ModelState.AddModelError("", "Ocorreu um erro ao salvar os dados: " + ex.Message);
+                }
             }
             return View(cidade);
         }

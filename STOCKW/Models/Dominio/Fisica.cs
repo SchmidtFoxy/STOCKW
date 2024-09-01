@@ -2,7 +2,7 @@
 {
     public class Fisica : Pessoa
     {
-        public string CPF { get; set; }
+        public string? CPF { get; set; }
     }
 
 }
