@@ -1,0 +1,65 @@
+﻿@model IEnumerable<STOCKW.Models.Dominio.Movimentacao>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Item)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Entidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoMovimentacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Usuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuantidadeMovimentada)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item.ID_Item)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Entidade.ID_Pessoa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoMovimentacao.ID_TipoMovimentacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario.ID_Usuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuantidadeMovimentada)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID_Movimentacao">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID_Movimentacao">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID_Movimentacao">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
