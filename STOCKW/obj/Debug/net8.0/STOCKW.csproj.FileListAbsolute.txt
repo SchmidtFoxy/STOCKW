@@ -264,3 +264,4 @@ D:\Softwares\STOCKW\STOCKW\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Drawi
 D:\Softwares\STOCKW\STOCKW\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 D:\Softwares\STOCKW\STOCKW\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
 D:\Softwares\STOCKW\STOCKW\obj\Debug\net8.0\STOCKW.sourcelink.json
+D:\Softwares\STOCKW\STOCKW\obj\Debug\net8.0\scopedcss\Views\Shared\_LayoutDeslogado.cshtml.rz.scp.css
