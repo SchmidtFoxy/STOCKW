@@ -66,9 +66,9 @@ namespace STOCKW.Data
                 .HasForeignKey(m => m.ID_Item);
 
             modelBuilder.Entity<Movimentacao>()
-                .HasOne(m => m.Entidade)
+                .HasOne(m => m.Pessoa)
                 .WithMany(p => p.Movimentacoes)
-                .HasForeignKey(m => m.ID_Entidade);
+                .HasForeignKey(m => m.ID_Pessoa);
 
             modelBuilder.Entity<Movimentacao>()
                 .HasOne(m => m.TipoMovimentacao)

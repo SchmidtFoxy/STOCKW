@@ -22,7 +22,7 @@ namespace STOCKW.Controllers
         // GET: Movimentacaos
         public async Task<IActionResult> Index()
         {
-            var meuDbContext = _context.Movimentacoes.Include(m => m.Entidade).Include(m => m.Item).Include(m => m.TipoMovimentacao).Include(m => m.Usuario);
+            var meuDbContext = _context.Movimentacoes.Include(m => m.Pessoa).Include(m => m.Item).Include(m => m.TipoMovimentacao).Include(m => m.Usuario);
             return View(await meuDbContext.ToListAsync());
         }
 
@@ -35,7 +35,7 @@ namespace STOCKW.Controllers
             }
 
             var movimentacao = await _context.Movimentacoes
-                .Include(m => m.Entidade)
+                .Include(m => m.Pessoa)
                 .Include(m => m.Item)
                 .Include(m => m.TipoMovimentacao)
                 .Include(m => m.Usuario)
@@ -51,10 +51,10 @@ namespace STOCKW.Controllers
         // GET: Movimentacaos/Create
         public IActionResult Create()
         {
-            ViewData["ID_Entidade"] = new SelectList(_context.Pessoas, "ID_Pessoa", "Discriminator");
-            ViewData["ID_Item"] = new SelectList(_context.Itens, "ID_Item", "ID_Item");
-            ViewData["ID_TipoMovimentacao"] = new SelectList(_context.TiposMovimentacao, "ID_TipoMovimentacao", "ID_TipoMovimentacao");
-            ViewData["ID_Usuario"] = new SelectList(_context.Usuarios, "ID_Usuario", "ID_Usuario");
+            ViewData["ID_Pessoa"] = new SelectList(_context.Pessoas, "ID_Pessoa", "Nome");
+            ViewData["ID_Item"] = new SelectList(_context.Itens, "ID_Item", "Nome");
+            ViewData["ID_TipoMovimentacao"] = new SelectList(_context.TiposMovimentacao, "ID_TipoMovimentacao", "Descricao");
+            ViewData["ID_Usuario"] = new SelectList(_context.Usuarios, "ID_Usuario", "Nome");
             return View();
         }
 
@@ -63,7 +63,7 @@ namespace STOCKW.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID_Movimentacao,ID_Item,ID_Entidade,ID_TipoMovimentacao,ID_Usuario,Data,QuantidadeMovimentada")] Movimentacao movimentacao)
+        public async Task<IActionResult> Create([Bind("ID_Movimentacao,ID_Item,ID_Pessoa,ID_TipoMovimentacao,ID_Usuario,Data,QuantidadeMovimentada")] Movimentacao movimentacao)
         {
             if (ModelState.IsValid)
             {
@@ -71,8 +71,8 @@ namespace STOCKW.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ID_Entidade"] = new SelectList(_context.Pessoas, "ID_Pessoa", "Discriminator", movimentacao.ID_Entidade);
-            ViewData["ID_Item"] = new SelectList(_context.Itens, "ID_Item", "ID_Item", movimentacao.ID_Item);
+            ViewData["ID_Pessoa"] = new SelectList(_context.Pessoas, "ID_Pessoa", "ID_Pessoa", movimentacao.ID_Pessoa);
+            ViewData["ID_Item"] = new SelectList(_context.Itens, "ID_Item", "Nome", movimentacao.ID_Item);
             ViewData["ID_TipoMovimentacao"] = new SelectList(_context.TiposMovimentacao, "ID_TipoMovimentacao", "ID_TipoMovimentacao", movimentacao.ID_TipoMovimentacao);
             ViewData["ID_Usuario"] = new SelectList(_context.Usuarios, "ID_Usuario", "ID_Usuario", movimentacao.ID_Usuario);
             return View(movimentacao);
@@ -91,8 +91,8 @@ namespace STOCKW.Controllers
             {
                 return NotFound();
             }
-            ViewData["ID_Entidade"] = new SelectList(_context.Pessoas, "ID_Pessoa", "Discriminator", movimentacao.ID_Entidade);
-            ViewData["ID_Item"] = new SelectList(_context.Itens, "ID_Item", "ID_Item", movimentacao.ID_Item);
+            ViewData["ID_Pessoa"] = new SelectList(_context.Pessoas, "ID_Pessoa", "ID_Pessoa", movimentacao.ID_Pessoa);
+            ViewData["ID_Item"] = new SelectList(_context.Itens, "ID_Item", "Nome", movimentacao.ID_Item);
             ViewData["ID_TipoMovimentacao"] = new SelectList(_context.TiposMovimentacao, "ID_TipoMovimentacao", "ID_TipoMovimentacao", movimentacao.ID_TipoMovimentacao);
             ViewData["ID_Usuario"] = new SelectList(_context.Usuarios, "ID_Usuario", "ID_Usuario", movimentacao.ID_Usuario);
             return View(movimentacao);
@@ -103,7 +103,7 @@ namespace STOCKW.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID_Movimentacao,ID_Item,ID_Entidade,ID_TipoMovimentacao,ID_Usuario,Data,QuantidadeMovimentada")] Movimentacao movimentacao)
+        public async Task<IActionResult> Edit(int id, [Bind("ID_Movimentacao,ID_Item,ID_Pessoa,ID_TipoMovimentacao,ID_Usuario,Data,QuantidadeMovimentada")] Movimentacao movimentacao)
         {
             if (id != movimentacao.ID_Movimentacao)
             {
@@ -130,8 +130,8 @@ namespace STOCKW.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ID_Entidade"] = new SelectList(_context.Pessoas, "ID_Pessoa", "Discriminator", movimentacao.ID_Entidade);
-            ViewData["ID_Item"] = new SelectList(_context.Itens, "ID_Item", "ID_Item", movimentacao.ID_Item);
+            ViewData["ID_Pessoa"] = new SelectList(_context.Pessoas, "ID_Pessoa", "ID_Pessoa", movimentacao.ID_Pessoa);
+            ViewData["ID_Item"] = new SelectList(_context.Itens, "ID_Item", "Nome", movimentacao.ID_Item);
             ViewData["ID_TipoMovimentacao"] = new SelectList(_context.TiposMovimentacao, "ID_TipoMovimentacao", "ID_TipoMovimentacao", movimentacao.ID_TipoMovimentacao);
             ViewData["ID_Usuario"] = new SelectList(_context.Usuarios, "ID_Usuario", "ID_Usuario", movimentacao.ID_Usuario);
             return View(movimentacao);
@@ -146,7 +146,7 @@ namespace STOCKW.Controllers
             }
 
             var movimentacao = await _context.Movimentacoes
-                .Include(m => m.Entidade)
+                .Include(m => m.Pessoa)
                 .Include(m => m.Item)
                 .Include(m => m.TipoMovimentacao)
                 .Include(m => m.Usuario)

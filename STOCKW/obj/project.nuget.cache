@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "7H0qIVX7ei1nGP/kwXvp34E/7OXR0Ak0n6HIo7atpsJhAHFgUm5uHwoUf4iikLiGecfz7ye8r2TtcDOQFtxslA==",
+  "dgSpecHash": "dNKHmxE7WVCgCHU/eFmu+14KvkAYv6YiDki+eZOioej1dqIGz2FRcjfyN2nZfSuljeryFlfXyeEPXyBPDGjpbw==",
   "success": true,
   "projectFilePath": "D:\\Softwares\\STOCKW\\STOCKW\\STOCKW.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Lucas\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Lucas\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
+    "C:\\Users\\Lucas\\.nuget\\packages\\bootstrap\\5.3.3\\bootstrap.5.3.3.nupkg.sha512",
     "C:\\Users\\Lucas\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\Lucas\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Lucas\\.nuget\\packages\\humanizer.core.af\\2.14.1\\humanizer.core.af.2.14.1.nupkg.sha512",

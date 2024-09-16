@@ -48,7 +48,7 @@ namespace STOCKW.Controllers
         // GET: Usuarios/Create
         public IActionResult Create()
         {
-            ViewData["ID_Permissao"] = new SelectList(_context.Permissoes, "ID_Permissao", "ID_Permissao");
+            ViewData["ID_Permissao"] = new SelectList(_context.Permissoes, "ID_Permissao", "GrupoPermissao");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace STOCKW.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ID_Permissao"] = new SelectList(_context.Permissoes, "ID_Permissao", "ID_Permissao", usuario.ID_Permissao);
+            ViewData["ID_Permissao"] = new SelectList(_context.Permissoes, "ID_Permissao", "GrupoPermissao", usuario.ID_Permissao);
             return View(usuario);
         }
 
@@ -82,7 +82,7 @@ namespace STOCKW.Controllers
             {
                 return NotFound();
             }
-            ViewData["ID_Permissao"] = new SelectList(_context.Permissoes, "ID_Permissao", "ID_Permissao", usuario.ID_Permissao);
+            ViewData["ID_Permissao"] = new SelectList(_context.Permissoes, "ID_Permissao", "GrupoPermissao", usuario.ID_Permissao);
             return View(usuario);
         }
 
@@ -118,7 +118,7 @@ namespace STOCKW.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ID_Permissao"] = new SelectList(_context.Permissoes, "ID_Permissao", "ID_Permissao", usuario.ID_Permissao);
+            ViewData["ID_Permissao"] = new SelectList(_context.Permissoes, "ID_Permissao", "GrupoPermissao", usuario.ID_Permissao);
             return View(usuario);
         }
 

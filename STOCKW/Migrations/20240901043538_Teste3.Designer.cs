@@ -96,7 +96,7 @@ namespace STOCKW.Migrations
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ID_Entidade")
+                    b.Property<int>("ID_Pessoa")
                         .HasColumnType("int");
 
                     b.Property<int>("ID_Item")
@@ -113,7 +113,7 @@ namespace STOCKW.Migrations
 
                     b.HasKey("ID_Movimentacao");
 
-                    b.HasIndex("ID_Entidade");
+                    b.HasIndex("ID_Pessoa");
 
                     b.HasIndex("ID_Item");
 
@@ -267,7 +267,7 @@ namespace STOCKW.Migrations
                 {
                     b.HasOne("STOCKW.Models.Dominio.Pessoa", "Entidade")
                         .WithMany("Movimentacoes")
-                        .HasForeignKey("ID_Entidade")
+                        .HasForeignKey("ID_Pessoa")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

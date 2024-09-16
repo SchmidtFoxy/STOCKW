@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<STOCKW.Models.Identidade.Usuario>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Usuarios";
 }
 
-<h1>Index</h1>
+<h1>Usuarios</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -40,7 +40,7 @@
                 @Html.DisplayFor(modelItem => item.Contato)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Permissao.ID_Permissao)
+                    @Html.DisplayFor(modelItem => item.Permissao.GrupoPermissao)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID_Usuario">Edit</a> |

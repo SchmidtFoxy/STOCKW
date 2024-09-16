@@ -128,7 +128,7 @@ namespace STOCKW.Migrations
                     ID_Movimentacao = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ID_Item = table.Column<int>(type: "int", nullable: false),
-                    ID_Entidade = table.Column<int>(type: "int", nullable: false),
+                    ID_Pessoa = table.Column<int>(type: "int", nullable: false),
                     ID_TipoMovimentacao = table.Column<int>(type: "int", nullable: false),
                     ID_Usuario = table.Column<int>(type: "int", nullable: false),
                     Data = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -144,8 +144,8 @@ namespace STOCKW.Migrations
                         principalColumn: "ID_Item",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Movimentacoes_Pessoas_ID_Entidade",
-                        column: x => x.ID_Entidade,
+                        name: "FK_Movimentacoes_Pessoas_ID_Pessoa",
+                        column: x => x.ID_Pessoa,
                         principalTable: "Pessoas",
                         principalColumn: "ID_Pessoa",
                         onDelete: ReferentialAction.Cascade);
@@ -164,9 +164,9 @@ namespace STOCKW.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Movimentacoes_ID_Entidade",
+                name: "IX_Movimentacoes_ID_Pessoa",
                 table: "Movimentacoes",
-                column: "ID_Entidade");
+                column: "ID_Pessoa");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Movimentacoes_ID_Item",

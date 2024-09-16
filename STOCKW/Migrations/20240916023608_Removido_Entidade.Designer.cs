@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using STOCKW.Data;
 
@@ -11,9 +12,11 @@ using STOCKW.Data;
 namespace STOCKW.Migrations
 {
     [DbContext(typeof(MeuDbContext))]
-    partial class MeuDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240916023608_Removido_Entidade")]
+    partial class Removido_Entidade
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,10 +92,10 @@ namespace STOCKW.Migrations
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ID_Item")
+                    b.Property<int>("ID_Pessoa")
                         .HasColumnType("int");
 
-                    b.Property<int>("ID_Pessoa")
+                    b.Property<int>("ID_Item")
                         .HasColumnType("int");
 
                     b.Property<int>("ID_TipoMovimentacao")
@@ -106,9 +109,9 @@ namespace STOCKW.Migrations
 
                     b.HasKey("ID_Movimentacao");
 
-                    b.HasIndex("ID_Item");
-
                     b.HasIndex("ID_Pessoa");
+
+                    b.HasIndex("ID_Item");
 
                     b.HasIndex("ID_TipoMovimentacao");
 
@@ -249,15 +252,15 @@ namespace STOCKW.Migrations
 
             modelBuilder.Entity("STOCKW.Models.Dominio.Movimentacao", b =>
                 {
-                    b.HasOne("STOCKW.Models.Dominio.Item", "Item")
+                    b.HasOne("STOCKW.Models.Dominio.Pessoa", "Entidade")
                         .WithMany("Movimentacoes")
-                        .HasForeignKey("ID_Item")
+                        .HasForeignKey("ID_Pessoa")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("STOCKW.Models.Dominio.Pessoa", "Pessoa")
+                    b.HasOne("STOCKW.Models.Dominio.Item", "Item")
                         .WithMany("Movimentacoes")
-                        .HasForeignKey("ID_Pessoa")
+                        .HasForeignKey("ID_Item")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -273,9 +276,9 @@ namespace STOCKW.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Item");
+                    b.Navigation("Entidade");
 
-                    b.Navigation("Pessoa");
+                    b.Navigation("Item");
 
                     b.Navigation("TipoMovimentacao");
 

@@ -1,22 +1,23 @@
 ﻿@model IEnumerable<STOCKW.Models.Dominio.Movimentacao>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Movimentacoes";
 }
 
-<h1>Index</h1>
+<h1>Movimentacoes</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Cadastrar movimentação</a>
 </p>
-<table class="table">
-    <thead>
+
+<table class="table table-striped table-bordered" id="table-movimentacoes">
+    <thead class="thead-dark">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Item)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Entidade)
+                @Html.DisplayNameFor(model => model.Pessoa)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.TipoMovimentacao)
@@ -34,32 +35,33 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Item.ID_Item)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Entidade.ID_Pessoa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoMovimentacao.ID_TipoMovimentacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Usuario.ID_Usuario)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Data)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuantidadeMovimentada)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID_Movimentacao">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID_Movimentacao">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID_Movimentacao">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pessoa.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoMovimentacao.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuantidadeMovimentada)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID_Movimentacao" class="btn btn-sm btn-warning">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID_Movimentacao" class="btn btn-sm btn-info">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID_Movimentacao" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
