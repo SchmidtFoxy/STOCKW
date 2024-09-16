@@ -65,17 +65,26 @@ namespace STOCKW.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID_Movimentacao,ID_Item,ID_Pessoa,ID_TipoMovimentacao,ID_Usuario,Data,QuantidadeMovimentada")] Movimentacao movimentacao)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(movimentacao);
-                await _context.SaveChangesAsync();
+                if (ModelState.IsValid)
+                {
+                    _context.Add(movimentacao);
+                    await _context.SaveChangesAsync();
+                    TempData["MensagemSucesso"] = "Movimentação cadastrada com sucesso";
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["ID_Pessoa"] = new SelectList(_context.Pessoas, "ID_Pessoa", "ID_Pessoa", movimentacao.ID_Pessoa);
+                ViewData["ID_Item"] = new SelectList(_context.Itens, "ID_Item", "Nome", movimentacao.ID_Item);
+                ViewData["ID_TipoMovimentacao"] = new SelectList(_context.TiposMovimentacao, "ID_TipoMovimentacao", "ID_TipoMovimentacao", movimentacao.ID_TipoMovimentacao);
+                ViewData["ID_Usuario"] = new SelectList(_context.Usuarios, "ID_Usuario", "ID_Usuario", movimentacao.ID_Usuario);
+                return View(movimentacao);
+            }
+            catch (System.Exception erro)
+            {
+                TempData["MensagemSucesso"] = $"Não foi possível cadastrar a movimentação, tente novamente, detalhe do erro:{erro.Message}";
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ID_Pessoa"] = new SelectList(_context.Pessoas, "ID_Pessoa", "ID_Pessoa", movimentacao.ID_Pessoa);
-            ViewData["ID_Item"] = new SelectList(_context.Itens, "ID_Item", "Nome", movimentacao.ID_Item);
-            ViewData["ID_TipoMovimentacao"] = new SelectList(_context.TiposMovimentacao, "ID_TipoMovimentacao", "ID_TipoMovimentacao", movimentacao.ID_TipoMovimentacao);
-            ViewData["ID_Usuario"] = new SelectList(_context.Usuarios, "ID_Usuario", "ID_Usuario", movimentacao.ID_Usuario);
-            return View(movimentacao);
         }
 
         // GET: Movimentacaos/Edit/5
@@ -110,31 +119,45 @@ namespace STOCKW.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            try
             {
-                try
+                if (ModelState.IsValid)
                 {
-                    _context.Update(movimentacao);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!MovimentacaoExists(movimentacao.ID_Movimentacao))
+                    try
                     {
-                        return NotFound();
+                        _context.Update(movimentacao);
+                        TempData["MensagemSucesso"] = "Movimentação alterada com sucesso";
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!MovimentacaoExists(movimentacao.ID_Movimentacao))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+                    return RedirectToAction(nameof(Index));
                 }
+                ViewData["ID_Pessoa"] = new SelectList(_context.Pessoas, "ID_Pessoa", "ID_Pessoa", movimentacao.ID_Pessoa);
+                ViewData["ID_Item"] = new SelectList(_context.Itens, "ID_Item", "Nome", movimentacao.ID_Item);
+                ViewData["ID_TipoMovimentacao"] = new SelectList(_context.TiposMovimentacao, "ID_TipoMovimentacao", "ID_TipoMovimentacao", movimentacao.ID_TipoMovimentacao);
+                ViewData["ID_Usuario"] = new SelectList(_context.Usuarios, "ID_Usuario", "ID_Usuario", movimentacao.ID_Usuario);
+                TempData["MensagemSucesso"] = "Movimentação alterada com sucesso";
+                return View(movimentacao);
+
+            }
+            catch (System.Exception erro)
+            {
+                TempData["MensagemErro"] = $"Não foi possível modificar a movimentação, tente novamente, detalhe do erro:{erro.Message}";
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ID_Pessoa"] = new SelectList(_context.Pessoas, "ID_Pessoa", "ID_Pessoa", movimentacao.ID_Pessoa);
-            ViewData["ID_Item"] = new SelectList(_context.Itens, "ID_Item", "Nome", movimentacao.ID_Item);
-            ViewData["ID_TipoMovimentacao"] = new SelectList(_context.TiposMovimentacao, "ID_TipoMovimentacao", "ID_TipoMovimentacao", movimentacao.ID_TipoMovimentacao);
-            ViewData["ID_Usuario"] = new SelectList(_context.Usuarios, "ID_Usuario", "ID_Usuario", movimentacao.ID_Usuario);
-            return View(movimentacao);
+
+
+
         }
 
         // GET: Movimentacaos/Delete/5
